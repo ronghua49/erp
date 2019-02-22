@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="servicePrivoder"/>
+    <!--注册中心地址-->
+    <dubbo:registry address="zookeeper://132.232.96.207:2181"/>
+    <!--dubbo的协议和端口 添加host可以指定使用的网卡-->
+  <!--  <dubbo:protocol host="localhost" name="dubbo" port="20880"/>-->
+    <!--暴露服务-->
+    <dubbo:service interface="com.haohua.erp.service.PartService" ref="partServiceImpl" />
+    <dubbo:service interface="com.haohua.erp.service.EmployeeService" ref="employeeServiceImpl" />
+    <dubbo:service interface="com.haohua.erp.service.RoleService" ref="roleServiceImpl" />
+    <dubbo:service interface="com.haohua.erp.service.RolePremissionService" ref="rolePremissionServiceImpl" />
+    <dubbo:service interface="com.haohua.erp.service.PremissionService" ref="premissionServiceImpl" />
+    <dubbo:service interface="com.haohua.erp.service.FixOrderService" ref="fixOrderServiceImpl"/>
+    <dubbo:service interface="com.haohua.erp.service.OrderService" ref="orderServiceImpl"/>
+    <dubbo:service interface="com.haohua.erp.service.CarService" ref="carServiceImpl"/>
+    <dubbo:protocol name="dubbo" port="20880" />
+</beans>

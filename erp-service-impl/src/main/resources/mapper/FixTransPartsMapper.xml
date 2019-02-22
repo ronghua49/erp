@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haohua.erp.mapper.FixTransPartsMapper">
+  <resultMap id="BaseResultMap" type="com.haohua.erp.entity.FixTransParts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parts_no" jdbcType="VARCHAR" property="partsNo" />
+    <result column="parts_name" jdbcType="VARCHAR" property="partsName" />
+    <result column="parts_num" jdbcType="INTEGER" property="partsNum" />
+    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="employee_name" jdbcType="VARCHAR" property="employeeName" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parts_no, parts_name, parts_num, order_type, employee_name, `state`, order_id, 
+    order_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.haohua.erp.entity.FixTransPartsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fix_trans_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fix_trans_parts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fix_trans_parts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haohua.erp.entity.FixTransPartsExample">
+    delete from fix_trans_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haohua.erp.entity.FixTransParts">
+    insert into fix_trans_parts (id, parts_no, parts_name, 
+      parts_num, order_type, employee_name, 
+      `state`, order_id, order_time, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{partsNo,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
+      #{partsNum,jdbcType=INTEGER}, #{orderType,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haohua.erp.entity.FixTransParts">
+    insert into fix_trans_parts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="partsNo != null">
+        parts_no,
+      </if>
+      <if test="partsName != null">
+        parts_name,
+      </if>
+      <if test="partsNum != null">
+        parts_num,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="partsNo != null">
+        #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null">
+        #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNum != null">
+        #{partsNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haohua.erp.entity.FixTransPartsExample" resultType="java.lang.Long">
+    select count(*) from fix_trans_parts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fix_trans_parts
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.partsNo != null">
+        parts_no = #{record.partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partsName != null">
+        parts_name = #{record.partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partsNum != null">
+        parts_num = #{record.partsNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderType != null">
+        order_type = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeName != null">
+        employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        `state` = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderTime != null">
+        order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fix_trans_parts
+    set id = #{record.id,jdbcType=INTEGER},
+      parts_no = #{record.partsNo,jdbcType=VARCHAR},
+      parts_name = #{record.partsName,jdbcType=VARCHAR},
+      parts_num = #{record.partsNum,jdbcType=INTEGER},
+      order_type = #{record.orderType,jdbcType=VARCHAR},
+      employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      `state` = #{record.state,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohua.erp.entity.FixTransParts">
+    update fix_trans_parts
+    <set>
+      <if test="partsNo != null">
+        parts_no = #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsName != null">
+        parts_name = #{partsName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNum != null">
+        parts_num = #{partsNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haohua.erp.entity.FixTransParts">
+    update fix_trans_parts
+    set parts_no = #{partsNo,jdbcType=VARCHAR},
+      parts_name = #{partsName,jdbcType=VARCHAR},
+      parts_num = #{partsNum,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      employee_name = #{employeeName,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

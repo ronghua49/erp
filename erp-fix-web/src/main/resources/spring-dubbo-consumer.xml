@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="fixWeb"/>
+    <!--dubbo的协议和端口-->
+    <dubbo:registry address="zookeeper://132.232.96.207:2181"/>
+    <!--接收消费服务-->
+    <dubbo:reference interface="com.haohua.erp.service.RoleService" id="roleService" timeout="50000"/>
+    <dubbo:reference interface="com.haohua.erp.service.FixOrderService" id="fixOrderService" timeout="50000"/>
+    <dubbo:reference interface="com.haohua.erp.service.EmployeeService" id="employeeService" timeout="50000"/>
+    <dubbo:reference interface="com.haohua.erp.service.PremissionService" id="premissionService" timeout="50000"/>
+    <dubbo:reference interface="com.haohua.erp.service.RolePremissionService" id="rolePremissionService" timeout="50000"/>
+    <dubbo:protocol name="dubbo" port="20880" />
+</beans>
